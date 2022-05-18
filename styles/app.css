@@ -12,8 +12,8 @@ body {
     border: 1px solid darkgray;
     background-color: #2d333b;
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     left: 50%;
     top: 50%;
     text-align: center;
@@ -26,7 +26,8 @@ body {
 p {
     font-size: 32px;
     color: #FFF;
-    padding-top: 25px;
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 span {
@@ -35,17 +36,61 @@ span {
 
 .slider {
     appearance: none;
-    background-color: darkgrey;
+    background-color: #f2f3f4;
     border: 1px solid black;
-    width: 90%;
+    width: 70%;
     height: 10px;
     border-radius: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .slider::-webkit-slider-thumb {
     appearance: none;
-    background-color: lightgreen;
+    background-color: #4CAF50;
     width: 25px;
     height: 25px;
     border-radius: 50px;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    border: solid 1px #FFF;
+    cursor: pointer;
+}
+
+.btn {
+    border: solid 1px #FFF;
+    background-color: #f2f3f4;
+    color: black;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    font-size: 20px;
+}
+
+.btn:hover {
+    background-color: #4CAF50;
+    color: #FFF;
+    cursor: pointer;
+}
+
+#playbtn {
+    width: 80px;
+    height: 40px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: solid 2px #FFF;
+}
+
+.start:hover {
+    background-color: #4CAF50;
+    cursor: pointer;
+    color: #FFF;
+}
+
+.stop:hover {
+    background-color: #f44336;
+    cursor: pointer;
+    color: #FFF;
 }
