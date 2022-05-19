@@ -74,7 +74,7 @@ span {
     cursor: pointer;
 }
 
-#playbtn {
+.btns {
     width: 80px;
     height: 40px;
     margin-left: 10px;
@@ -83,14 +83,15 @@ span {
     border: solid 2px #FFF;
 }
 
-.start:hover {
-    background-color: #4CAF50;
+.btns:hover {
     cursor: pointer;
     color: #FFF;
 }
 
+.start:hover {
+    background-color: #4CAF50;
+}
+
 .stop:hover {
     background-color: #f44336;
-    cursor: pointer;
-    color: #FFF;
 }
