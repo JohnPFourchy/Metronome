@@ -7,6 +7,8 @@ let audioSource;
 let counter = 0;
 // Boolean for if the audio has been played before
 let firstPlay = false;
+// array to hold the dots for visual tempo
+let dotArray = document.getElementsByClassName("sec");
 
 
 // Increases the tempo of the metronome when the '+' button is pressed
@@ -22,6 +24,8 @@ function increaseTempo() {
     // Reset the audio when the button is pressed - creates smooth transitions with audio when changing tempos
     counter = 0;
     window.clearTimeout(audioSource);
+    resetDotColors();
+
     if(firstPlay) {
         figureInterval();
     }
@@ -40,6 +44,8 @@ function decreaseTempo() {
     // Reset the audio when the button is pressed - creates smooth transitions with audio when changing tempos
     counter = 0;
     window.clearTimeout(audioSource);
+    resetDotColors();
+
     if(firstPlay) {
         figureInterval();
     }
@@ -51,9 +57,10 @@ function draggingTempo() {
     // Reset the audio for smooth transitions when changing tempos
     window.clearTimeout(audioSource);
     counter = 0;
+    resetDotColors();
 
     // Check to only play sound by dragging slider when 
-    if(firstPlay && stopPressed == true) {
+    if(firstPlay) {
         figureInterval();
     }
 }
@@ -71,13 +78,25 @@ function figureInterval() {
 }
 
 // Play a click sound. If the beat is at the top of the measure (in 4/4 time)
-// a different sound is played
+// a different sound is played. Also handles changing the colors of the visual dots.
 function playClick() {
-    if(counter % 4 == 0) {
+    // Change the color of a visual dot to white
+    if((counter % 4) != 0) {
+        dotArray[(counter % 4) - 1].style.backgroundColor = "#FFF";
+    } else {
+        dotArray[3].style.backgroundColor = "#FFF";
+    }
+    
+    // play a sound
+    if(counter % 4 == 0) { 
         click2.play();
     } else {
         click1.play();
+        
     }
+
+    // change the color of a visual dot to green
+    dotArray[counter % 4].style.backgroundColor = "#4CAF50";
     counter += 1;
 }
 
@@ -85,4 +104,12 @@ function playClick() {
 function stopClick() {
     counter = 0;
     window.clearTimeout(audioSource);
+    resetDotColors();
+}
+
+// Resets the dot colors for smooth transitions when changing tempos
+function resetDotColors() {
+    for(let i = 0; i < dotArray.length; i++) {
+        dotArray[i].style.backgroundColor = "#FFF";
+    }
 }

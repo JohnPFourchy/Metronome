@@ -8,6 +8,17 @@ body {
     background-color: #22272e;
 }
 
+.sec {
+    width: 30px;
+    height: 30px;
+    background-color: #FFF;
+    border-radius: 50px;
+    display: inline-block;
+    margin-bottom: 50px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+
 .container {
     border: 1px solid darkgray;
     background-color: #2d333b;
