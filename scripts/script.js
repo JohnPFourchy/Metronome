@@ -5,6 +5,10 @@ let audioSource;
 
 // A counter to play the correct click
 let counter = 0;
+
+let stoppedPressed = true;
+// A counter to display the beat number
+let beatCounter = 1;
 // Boolean for if the audio has been played before
 let firstPlay = false;
 // array to hold the dots for visual tempo
@@ -23,10 +27,11 @@ function increaseTempo() {
 
     // Reset the audio when the button is pressed - creates smooth transitions with audio when changing tempos
     counter = 0;
+    beatCounter = 1;
     window.clearTimeout(audioSource);
     resetDotColors();
 
-    if(firstPlay) {
+    if(firstPlay && stoppedPressed == false) {
         figureInterval();
     }
 }
@@ -44,9 +49,10 @@ function decreaseTempo() {
     // Reset the audio when the button is pressed - creates smooth transitions with audio when changing tempos
     counter = 0;
     window.clearTimeout(audioSource);
+    beatCounter = 1;
     resetDotColors();
 
-    if(firstPlay) {
+    if(firstPlay && stoppedPressed == false) {
         figureInterval();
     }
 }
@@ -57,16 +63,18 @@ function draggingTempo() {
     // Reset the audio for smooth transitions when changing tempos
     window.clearTimeout(audioSource);
     counter = 0;
+    beatCounter = 1;
     resetDotColors();
 
     // Check to only play sound by dragging slider when 
-    if(firstPlay) {
+    if(firstPlay && stoppedPressed == false) {
         figureInterval();
     }
 }
 
 // Figure out the correct amount of time between beats
 function figureInterval() {
+    stoppedPressed = false;
     firstPlay = true;
     let sliderVal = parseInt(document.getElementById("mainSlider").value);
     let seconds = 60.0 / sliderVal;
@@ -92,8 +100,15 @@ function playClick() {
         click2.play();
     } else {
         click1.play();
-        
     }
+
+    // Set the beat counter back to 1
+    if(beatCounter > 4) {
+        beatCounter = 1;
+    }
+
+    document.getElementById("beatNumber").innerHTML = beatCounter;
+    beatCounter += 1;
 
     // change the color of a visual dot to green
     dotArray[counter % 4].style.backgroundColor = "#4CAF50";
@@ -102,7 +117,10 @@ function playClick() {
 
 // Stop audio when stop is pressed.
 function stopClick() {
+    stoppedPressed = true;
     counter = 0;
+    beatCounter = 1;
+    document.getElementById("beatNumber").innerHTML = "- -"
     window.clearTimeout(audioSource);
     resetDotColors();
 }
